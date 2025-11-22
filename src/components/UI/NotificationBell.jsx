@@ -3,14 +3,14 @@ import { Link } from 'react-router-dom'
 import { Bell, X } from 'lucide-react'
 import { useNotificationsStore } from '@/store/notificationsStore'
 import { formatDistanceToNow } from 'date-fns'
-import { viLocale } from 'date-fns/locale'
+import { vi } from 'date-fns/locale'
 
 const NotificationBell = () => {
   const { notifications, unreadCount, markAsRead } = useNotificationsStore()
   const [isOpen, setIsOpen] = useState(false)
-
+  
   const recentNotifications = notifications.slice(0, 5)
-
+  
   return (
     <div className="relative">
       <button
@@ -77,7 +77,7 @@ const NotificationBell = () => {
                       <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
                         {formatDistanceToNow(new Date(notification.created_at), {
                           addSuffix: true,
-                          locale: viLocale
+                          locale: vi
                         })}
                       </p>
                     </div>

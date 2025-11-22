@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Heart, MessageCircle, UserPlus, Shield, Bell, Trash2 } from 'lucide-react'
 import { formatDistanceToNow } from 'date-fns'
-import { viLocale } from 'date-fns/locale'
+import { vi } from 'date-fns/locale'
 import { useAuthStore } from '@/store/authStore'
 import { useNotificationsStore } from '@/store/notificationsStore'
 import LoadingSpinner from '@/components/UI/LoadingSpinner'
@@ -12,7 +12,7 @@ const Notifications = () => {
   const { user } = useAuthStore()
   const { notifications, unreadCount, initializeNotifications, markAllAsRead, deleteNotification, markAsRead } = useNotificationsStore()
   const [loading, setLoading] = useState(true)
-
+  
   useEffect(() => {
     if (user?.id) {
       const unsubscribe = initializeNotifications(user.id)
@@ -20,7 +20,7 @@ const Notifications = () => {
       return () => unsubscribe?.()
     }
   }, [user?.id, initializeNotifications])
-
+  
   const getNotificationIcon = (type) => {
     const icons = {
       like: <Heart className="w-5 h-5 text-red-500" fill="currentColor" />,
@@ -31,7 +31,7 @@ const Notifications = () => {
     }
     return icons[type] || icons.system
   }
-
+  
   const getNotificationMessage = (notification) => {
     const sender = notification.sender?.[0]
     switch (notification.type) {
@@ -47,7 +47,7 @@ const Notifications = () => {
         return notification.content
     }
   }
-
+  
   if (loading) {
     return (
       <div className="flex justify-center py-12">
@@ -55,7 +55,7 @@ const Notifications = () => {
       </div>
     )
   }
-
+  
   return (
     <div className="max-w-2xl mx-auto">
       <div className="flex items-center justify-between mb-6">
@@ -144,7 +144,7 @@ const Notifications = () => {
                 <p className="text-xs text-gray-500 dark:text-gray-400 mt-2">
                   {formatDistanceToNow(new Date(notification.created_at), {
                     addSuffix: true,
-                    locale: viLocale
+                    locale: vi
                   })}
                 </p>
               </div>

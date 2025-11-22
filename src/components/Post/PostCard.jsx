@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Heart, MessageCircle, Share2, Trash2, AlertCircle, Shield } from 'lucide-react'
 import { formatDistanceToNow } from 'date-fns'
-import { viLocale } from 'date-fns/locale'
+import { vi } from 'date-fns/locale'
 import { supabase } from '@/lib/supabase'
 import { useAuthStore } from '@/store/authStore'
 import toast from 'react-hot-toast'
@@ -131,7 +131,7 @@ const PostCard = ({ post, onPostDeleted }) => {
       <p className="text-xs text-gray-500 dark:text-gray-400 mb-3">
         {formatDistanceToNow(new Date(post.created_at), { 
           addSuffix: true,
-          locale: viLocale 
+          locale: vi 
         })}
       </p>
 
