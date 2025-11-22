@@ -16,6 +16,7 @@ dist-ssr
 .env
 .env.local
 .env.*.local
+.env.production.local
 
 # IDE
 .vscode
@@ -23,13 +24,21 @@ dist-ssr
 *.swp
 *.swo
 *.iml
-
-# OS
 .DS_Store
-Thumbs.db
 
 # Build
 build/
 
 # Yarn
 yarn.lock
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Testing
+coverage/
+.nyc_output/
+
+# Vercel
+.vercel
