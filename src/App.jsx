@@ -25,16 +25,17 @@ import SignUp from '@/pages/Auth/SignUp'
 
 // Components
 import LoadingSpinner from '@/components/UI/LoadingSpinner'
+import ErrorBoundary from '@/components/ErrorBoundary'
 
 function App() {
   const { user, loading, initialize } = useAuthStore()
   const { initialize: initializeTheme } = useThemeStore()
-
+  
   useEffect(() => {
     initialize()
     initializeTheme()
   }, [initialize, initializeTheme])
-
+  
   if (loading) {
     return (
       <div className="min-h-screen bg-white dark:bg-gray-900 flex items-center justify-center">
@@ -42,57 +43,59 @@ function App() {
       </div>
     )
   }
-
+  
   return (
     <Router>
       <div className="min-h-screen bg-white dark:bg-gray-900 transition-colors">
-        <Routes>
-          {/* Auth Routes */}
-          <Route
-            path="/auth/signin"
-            element={
-              user ? <Navigate to="/" replace /> : (
-                <AuthLayout>
-                  <SignIn />
-                </AuthLayout>
-              )
-            }
-          />
-          <Route
-            path="/auth/signup"
-            element={
-              user ? <Navigate to="/" replace /> : (
-                <AuthLayout>
-                  <SignUp />
-                </AuthLayout>
-              )
-            }
-          />
+        <ErrorBoundary>
+          <Routes>
+            {/* Auth Routes */}
+            <Route
+              path="/auth/signin"
+              element={
+                user ? <Navigate to="/" replace /> : (
+                  <AuthLayout>
+                    <SignIn />
+                  </AuthLayout>
+                )
+              }
+            />
+            <Route
+              path="/auth/signup"
+              element={
+                user ? <Navigate to="/" replace /> : (
+                  <AuthLayout>
+                    <SignUp />
+                  </AuthLayout>
+                )
+              }
+            />
 
-          {/* Protected Routes */}
-          <Route
-            path="/*"
-            element={
-              user ? (
-                <Layout>
-                  <Routes>
-                    <Route path="/" element={<NewsFeed />} />
-                    <Route path="/search" element={<Search />} />
-                    <Route path="/trending" element={<Trending />} />
-                    <Route path="/notifications" element={<Notifications />} />
-                    <Route path="/new-post" element={<NewPost />} />
-                    <Route path="/profile/:username?" element={<Profile />} />
-                    <Route path="/settings" element={<Settings />} />
-                    <Route path="/verify" element={<VerifyAccount />} />
-                    <Route path="/admin" element={<AdminDashboard />} />
-                  </Routes>
-                </Layout>
-              ) : (
-                <Navigate to="/auth/signin" replace />
-              )
-            }
-          />
-        </Routes>
+            {/* Protected Routes */}
+            <Route
+              path="/*"
+              element={
+                user ? (
+                  <Layout>
+                    <Routes>
+                      <Route path="/" element={<NewsFeed />} />
+                      <Route path="/search" element={<Search />} />
+                      <Route path="/trending" element={<Trending />} />
+                      <Route path="/notifications" element={<Notifications />} />
+                      <Route path="/new-post" element={<NewPost />} />
+                      <Route path="/profile/:username?" element={<Profile />} />
+                      <Route path="/settings" element={<Settings />} />
+                      <Route path="/verify" element={<VerifyAccount />} />
+                      <Route path="/admin" element={<AdminDashboard />} />
+                    </Routes>
+                  </Layout>
+                ) : (
+                  <Navigate to="/auth/signin" replace />
+                )
+              }
+            />
+          </Routes>
+        </ErrorBoundary>
 
         <Toaster
           position="top-center"
