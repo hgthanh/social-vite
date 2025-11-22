@@ -4,18 +4,10 @@
   "installCommand": "npm install",
   "framework": "vite",
   "outputDirectory": "dist",
-  "env": [
-    {
-      "key": "VITE_SUPABASE_URL",
-      "value": "",
-      "type": "secret"
-    },
-    {
-      "key": "VITE_SUPABASE_ANON_KEY",
-      "value": "",
-      "type": "secret"
-    }
-  ],
+  "env": {
+    "VITE_SUPABASE_URL": "@vite_supabase_url",
+    "VITE_SUPABASE_ANON_KEY": "@vite_supabase_anon_key"
+  },
   "regions": ["sfo1"],
   "functions": {
     "api/**/*.js": {
