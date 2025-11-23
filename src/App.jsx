@@ -20,6 +20,7 @@ import VerifyAccount from '@/pages/VerifyAccount'
 import AdminDashboard from '@/pages/AdminDashboard'
 import Notifications from '@/pages/Notifications'
 import Trending from '@/pages/Trending'
+import Test from '@/pages/Test'
 import SignIn from '@/pages/Auth/SignIn'
 import SignUp from '@/pages/Auth/SignUp'
 
@@ -49,6 +50,9 @@ function App() {
       <div className="min-h-screen bg-white dark:bg-gray-900 transition-colors">
         <ErrorBoundary>
           <Routes>
+            {/* Test Route */}
+            <Route path="/test" element={<Test />} />
+
             {/* Auth Routes */}
             <Route
               path="/auth/signin"
